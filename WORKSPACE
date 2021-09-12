@@ -10,4 +10,13 @@ load("@rules_python//python:pip.bzl", "pip_install")
 pip_install(
    name = "test",
    requirements = "//:requirements.txt",
+    python_interpreter_target = "@python_interpreter//:python/install/bin/python3.8"
 )
+
+load("//tools/build/bazel/py_toolchain:py_interpreter.bzl", "python_build_standalone_interpreter")
+
+python_build_standalone_interpreter(
+    name = "python_interpreter",
+)
+
+register_toolchains("//tools/build/bazel/py_toolchain:py_toolchain")
